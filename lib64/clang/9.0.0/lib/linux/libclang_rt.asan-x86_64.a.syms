@@ -1,12 +1,14 @@
 {
   _Unwind_RaiseException;
   __asan_*;
+  __bzero;
   __cxa_atexit;
   __cxa_rethrow_primary_exception;
   __cxa_throw;
   __fprintf_chk;
   __getdelim;
   __interceptor__Unwind_RaiseException;
+  __interceptor___bzero;
   __interceptor___cxa_atexit;
   __interceptor___cxa_rethrow_primary_exception;
   __interceptor___cxa_throw;
@@ -66,6 +68,8 @@
   __interceptor_atoll;
   __interceptor_backtrace;
   __interceptor_backtrace_symbols;
+  __interceptor_bcmp;
+  __interceptor_bzero;
   __interceptor_calloc;
   __interceptor_canonicalize_file_name;
   __interceptor_capget;
@@ -271,6 +275,7 @@
   __interceptor_pthread_setcancelstate;
   __interceptor_pthread_setcanceltype;
   __interceptor_pthread_setname_np;
+  __interceptor_pthread_sigmask;
   __interceptor_ptrace;
   __interceptor_puts;
   __interceptor_pututxline;
@@ -389,9 +394,11 @@
   __interceptor_tmpnam;
   __interceptor_tmpnam_r;
   __interceptor_tsearch;
+  __interceptor_ttyname;
   __interceptor_ttyname_r;
   __interceptor_valloc;
   __interceptor_vasprintf;
+  __interceptor_vfork;
   __interceptor_vfprintf;
   __interceptor_vfscanf;
   __interceptor_vprintf;
@@ -1211,6 +1218,8 @@
   atoll;
   backtrace;
   backtrace_symbols;
+  bcmp;
+  bzero;
   calloc;
   canonicalize_file_name;
   capget;
@@ -1414,6 +1423,7 @@
   pthread_setcancelstate;
   pthread_setcanceltype;
   pthread_setname_np;
+  pthread_sigmask;
   ptrace;
   puts;
   pututxline;
@@ -1530,9 +1540,11 @@
   tmpnam;
   tmpnam_r;
   tsearch;
+  ttyname;
   ttyname_r;
   valloc;
   vasprintf;
+  vfork;
   vfprintf;
   vfscanf;
   vprintf;

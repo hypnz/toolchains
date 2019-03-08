@@ -1,10 +1,12 @@
 {
+  __bzero;
   __esan_aligned*;
   __esan_exit;
   __esan_init;
   __esan_unaligned*;
   __fprintf_chk;
   __getdelim;
+  __interceptor___bzero;
   __interceptor___fprintf_chk;
   __interceptor___getdelim;
   __interceptor___isoc99_fprintf;
@@ -52,6 +54,8 @@
   __interceptor_asprintf;
   __interceptor_backtrace;
   __interceptor_backtrace_symbols;
+  __interceptor_bcmp;
+  __interceptor_bzero;
   __interceptor_calloc;
   __interceptor_canonicalize_file_name;
   __interceptor_capget;
@@ -360,6 +364,7 @@
   __interceptor_tmpnam;
   __interceptor_tmpnam_r;
   __interceptor_tsearch;
+  __interceptor_ttyname;
   __interceptor_ttyname_r;
   __interceptor_unlink;
   __interceptor_vasprintf;
@@ -1125,6 +1130,8 @@
   asprintf;
   backtrace;
   backtrace_symbols;
+  bcmp;
+  bzero;
   calloc;
   canonicalize_file_name;
   capget;
@@ -1430,6 +1437,7 @@
   tmpnam;
   tmpnam_r;
   tsearch;
+  ttyname;
   ttyname_r;
   unlink;
   vasprintf;

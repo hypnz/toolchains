@@ -650,6 +650,15 @@
         return 1;
     break;
   }
+  case AT_FortifyStdLib: {
+    if (Name == "fortify_stdlib" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "fortify_stdlib" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "fortify_stdlib" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
   case AT_GNUInline: {
     if (Name == "gnu_inline" && SyntaxUsed == 0 && Scope == "")
         return 0;
@@ -780,6 +789,15 @@
         return 3;
     if (Name == "nounroll_and_jam" && SyntaxUsed == 6 && Scope == "")
         return 4;
+    break;
+  }
+  case AT_MIGServerRoutine: {
+    if (Name == "mig_server_routine" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "mig_server_routine" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "mig_server_routine" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
     break;
   }
   case AT_MSABI: {
@@ -1302,6 +1320,15 @@
     if (Name == "NSObject" && SyntaxUsed == 1 && Scope == "clang")
         return 1;
     if (Name == "NSObject" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_ObjCNonLazyClass: {
+    if (Name == "objc_nonlazy_class" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "objc_nonlazy_class" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "objc_nonlazy_class" && SyntaxUsed == 2 && Scope == "clang")
         return 2;
     break;
   }
@@ -2045,6 +2072,24 @@
         return 0;
     if (Name == "weakref" && SyntaxUsed == 1 && Scope == "gnu")
         return 1;
+    break;
+  }
+  case AT_WebAssemblyImportModule: {
+    if (Name == "import_module" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "import_module" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "import_module" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
+    break;
+  }
+  case AT_WebAssemblyImportName: {
+    if (Name == "import_name" && SyntaxUsed == 0 && Scope == "")
+        return 0;
+    if (Name == "import_name" && SyntaxUsed == 1 && Scope == "clang")
+        return 1;
+    if (Name == "import_name" && SyntaxUsed == 2 && Scope == "clang")
+        return 2;
     break;
   }
   case AT_WorkGroupSizeHint: {

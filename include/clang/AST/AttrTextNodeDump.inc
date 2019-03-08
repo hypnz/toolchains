@@ -6,11 +6,6 @@
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
 
-  void VisitAMDGPUFlatWorkGroupSizeAttr(const AMDGPUFlatWorkGroupSizeAttr *A) {
-    const auto *SA = cast<AMDGPUFlatWorkGroupSizeAttr>(A); (void)SA;
-    OS << " " << SA->getMin();
-    OS << " " << SA->getMax();
-  }
   void VisitAMDGPUNumSGPRAttr(const AMDGPUNumSGPRAttr *A) {
     const auto *SA = cast<AMDGPUNumSGPRAttr>(A); (void)SA;
     OS << " " << SA->getNumSGPR();
@@ -18,11 +13,6 @@
   void VisitAMDGPUNumVGPRAttr(const AMDGPUNumVGPRAttr *A) {
     const auto *SA = cast<AMDGPUNumVGPRAttr>(A); (void)SA;
     OS << " " << SA->getNumVGPR();
-  }
-  void VisitAMDGPUWavesPerEUAttr(const AMDGPUWavesPerEUAttr *A) {
-    const auto *SA = cast<AMDGPUWavesPerEUAttr>(A); (void)SA;
-    OS << " " << SA->getMin();
-    OS << " " << SA->getMax();
   }
   void VisitARMInterruptAttr(const ARMInterruptAttr *A) {
     const auto *SA = cast<ARMInterruptAttr>(A); (void)SA;
@@ -115,6 +105,7 @@
     OS << " \"" << SA->getMessage() << "\"";
     if (SA->getStrict()) OS << " Strict";
     OS << " \"" << SA->getReplacement() << "\"";
+    OS << " " << SA->getPriority();
   }
   void VisitBlocksAttr(const BlocksAttr *A) {
     const auto *SA = cast<BlocksAttr>(A); (void)SA;
@@ -245,6 +236,11 @@
   void VisitFormatArgAttr(const FormatArgAttr *A) {
     const auto *SA = cast<FormatArgAttr>(A); (void)SA;
     OS << " " << SA->getFormatIdx().getSourceIndex();
+  }
+  void VisitFortifyStdLibAttr(const FortifyStdLibAttr *A) {
+    const auto *SA = cast<FortifyStdLibAttr>(A); (void)SA;
+    OS << " " << SA->getType();
+    OS << " " << SA->getFlag();
   }
   void VisitIBOutletCollectionAttr(const IBOutletCollectionAttr *A) {
     const auto *SA = cast<IBOutletCollectionAttr>(A); (void)SA;
@@ -721,6 +717,14 @@
   void VisitWeakRefAttr(const WeakRefAttr *A) {
     const auto *SA = cast<WeakRefAttr>(A); (void)SA;
     OS << " \"" << SA->getAliasee() << "\"";
+  }
+  void VisitWebAssemblyImportModuleAttr(const WebAssemblyImportModuleAttr *A) {
+    const auto *SA = cast<WebAssemblyImportModuleAttr>(A); (void)SA;
+    OS << " \"" << SA->getImportModule() << "\"";
+  }
+  void VisitWebAssemblyImportNameAttr(const WebAssemblyImportNameAttr *A) {
+    const auto *SA = cast<WebAssemblyImportNameAttr>(A); (void)SA;
+    OS << " \"" << SA->getImportName() << "\"";
   }
   void VisitWorkGroupSizeHintAttr(const WorkGroupSizeHintAttr *A) {
     const auto *SA = cast<WorkGroupSizeHintAttr>(A); (void)SA;

@@ -759,7 +759,7 @@ public:
   ///
   /// \returns the DIEUnit that represents the compile or type unit that owns
   /// this DIE, or NULL if this DIE hasn't been added to a unit DIE.
-  const DIEUnit *getUnit() const;
+  DIEUnit *getUnit() const;
 
   void setOffset(unsigned O) { Offset = O; }
   void setSize(unsigned S) { Size = S; }
@@ -799,7 +799,7 @@ class DIEUnit {
   const uint16_t Version; /// The Dwarf version number for this unit.
   const uint8_t AddrSize; /// The size in bytes of an address for this unit.
 protected:
-  ~DIEUnit() = default;
+  virtual ~DIEUnit() = default;
 
 public:
   DIEUnit(uint16_t Version, uint8_t AddrSize, dwarf::Tag UnitTag);

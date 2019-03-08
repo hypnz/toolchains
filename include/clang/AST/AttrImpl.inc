@@ -1509,7 +1509,7 @@ const char *AssumeAlignedAttr::getSpelling() const {
 }
 
 AvailabilityAttr *AvailabilityAttr::clone(ASTContext &C) const {
-  auto *A = new (C) AvailabilityAttr(getLocation(), C, platform, getIntroduced(), getDeprecated(), getObsoleted(), unavailable, getMessage(), strict, getReplacement(), getSpellingListIndex());
+  auto *A = new (C) AvailabilityAttr(getLocation(), C, platform, getIntroduced(), getDeprecated(), getObsoleted(), unavailable, getMessage(), strict, getReplacement(), priority, getSpellingListIndex());
   A->Inherited = Inherited;
   A->IsPackExpansion = IsPackExpansion;
   A->Implicit = Implicit;
@@ -1532,11 +1532,11 @@ void AvailabilityAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy
     break;
   }
   case 1 : {
-    OS << " [[clang::availability(" << (getPlatform() ? getPlatform()->getName() : "") << ", introduced=" << getIntroduced() << ", deprecated=" << getDeprecated() << ", obsoleted=" << getObsoleted() << ", " << getUnavailable() << ", \"" << getMessage() << "\", " << getStrict() << ", \"" << getReplacement() << "\")]]";
+    OS << " [[clang::availability(" << (getPlatform() ? getPlatform()->getName() : "") << ", introduced=" << getIntroduced() << ", deprecated=" << getDeprecated() << ", obsoleted=" << getObsoleted() << ", " << getUnavailable() << ", \"" << getMessage() << "\", " << getStrict() << ", \"" << getReplacement() << "\", " << getPriority() << ")]]";
     break;
   }
   case 2 : {
-    OS << " [[clang::availability(" << (getPlatform() ? getPlatform()->getName() : "") << ", introduced=" << getIntroduced() << ", deprecated=" << getDeprecated() << ", obsoleted=" << getObsoleted() << ", " << getUnavailable() << ", \"" << getMessage() << "\", " << getStrict() << ", \"" << getReplacement() << "\")]]";
+    OS << " [[clang::availability(" << (getPlatform() ? getPlatform()->getName() : "") << ", introduced=" << getIntroduced() << ", deprecated=" << getDeprecated() << ", obsoleted=" << getObsoleted() << ", " << getUnavailable() << ", \"" << getMessage() << "\", " << getStrict() << ", \"" << getReplacement() << "\", " << getPriority() << ")]]";
     break;
   }
 }
@@ -3664,6 +3664,48 @@ const char *FormatArgAttr::getSpelling() const {
   }
 }
 
+FortifyStdLibAttr *FortifyStdLibAttr::clone(ASTContext &C) const {
+  auto *A = new (C) FortifyStdLibAttr(getLocation(), C, type, flag, getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void FortifyStdLibAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((fortify_stdlib(" << getType() << ", " << getFlag() << ")))";
+    break;
+  }
+  case 1 : {
+    OS << " [[clang::fortify_stdlib(" << getType() << ", " << getFlag() << ")]]";
+    break;
+  }
+  case 2 : {
+    OS << " [[clang::fortify_stdlib(" << getType() << ", " << getFlag() << ")]]";
+    break;
+  }
+}
+}
+
+const char *FortifyStdLibAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "fortify_stdlib";
+  case 1:
+    return "fortify_stdlib";
+  case 2:
+    return "fortify_stdlib";
+  }
+}
+
 GNUInlineAttr *GNUInlineAttr::clone(ASTContext &C) const {
   auto *A = new (C) GNUInlineAttr(getLocation(), C, getSpellingListIndex());
   A->Inherited = Inherited;
@@ -4340,6 +4382,48 @@ const char *LoopHintAttr::getSpelling() const {
     return "unroll_and_jam";
   case 4:
     return "nounroll_and_jam";
+  }
+}
+
+MIGServerRoutineAttr *MIGServerRoutineAttr::clone(ASTContext &C) const {
+  auto *A = new (C) MIGServerRoutineAttr(getLocation(), C, getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void MIGServerRoutineAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((mig_server_routine))";
+    break;
+  }
+  case 1 : {
+    OS << " [[clang::mig_server_routine]]";
+    break;
+  }
+  case 2 : {
+    OS << " [[clang::mig_server_routine]]";
+    break;
+  }
+}
+}
+
+const char *MIGServerRoutineAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "mig_server_routine";
+  case 1:
+    return "mig_server_routine";
+  case 2:
+    return "mig_server_routine";
   }
 }
 
@@ -6921,6 +7005,48 @@ const char *ObjCNSObjectAttr::getSpelling() const {
     return "NSObject";
   case 2:
     return "NSObject";
+  }
+}
+
+ObjCNonLazyClassAttr *ObjCNonLazyClassAttr::clone(ASTContext &C) const {
+  auto *A = new (C) ObjCNonLazyClassAttr(getLocation(), C, getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void ObjCNonLazyClassAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((objc_nonlazy_class))";
+    break;
+  }
+  case 1 : {
+    OS << " [[clang::objc_nonlazy_class]]";
+    break;
+  }
+  case 2 : {
+    OS << " [[clang::objc_nonlazy_class]]";
+    break;
+  }
+}
+}
+
+const char *ObjCNonLazyClassAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "objc_nonlazy_class";
+  case 1:
+    return "objc_nonlazy_class";
+  case 2:
+    return "objc_nonlazy_class";
   }
 }
 
@@ -10705,6 +10831,90 @@ const char *WeakRefAttr::getSpelling() const {
   }
 }
 
+WebAssemblyImportModuleAttr *WebAssemblyImportModuleAttr::clone(ASTContext &C) const {
+  auto *A = new (C) WebAssemblyImportModuleAttr(getLocation(), C, getImportModule(), getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void WebAssemblyImportModuleAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((import_module(\"" << getImportModule() << "\")))";
+    break;
+  }
+  case 1 : {
+    OS << " [[clang::import_module(\"" << getImportModule() << "\")]]";
+    break;
+  }
+  case 2 : {
+    OS << " [[clang::import_module(\"" << getImportModule() << "\")]]";
+    break;
+  }
+}
+}
+
+const char *WebAssemblyImportModuleAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "import_module";
+  case 1:
+    return "import_module";
+  case 2:
+    return "import_module";
+  }
+}
+
+WebAssemblyImportNameAttr *WebAssemblyImportNameAttr::clone(ASTContext &C) const {
+  auto *A = new (C) WebAssemblyImportNameAttr(getLocation(), C, getImportName(), getSpellingListIndex());
+  A->Inherited = Inherited;
+  A->IsPackExpansion = IsPackExpansion;
+  A->Implicit = Implicit;
+  return A;
+}
+
+void WebAssemblyImportNameAttr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    break;
+  case 0 : {
+    OS << " __attribute__((import_name(\"" << getImportName() << "\")))";
+    break;
+  }
+  case 1 : {
+    OS << " [[clang::import_name(\"" << getImportName() << "\")]]";
+    break;
+  }
+  case 2 : {
+    OS << " [[clang::import_name(\"" << getImportName() << "\")]]";
+    break;
+  }
+}
+}
+
+const char *WebAssemblyImportNameAttr::getSpelling() const {
+  switch (SpellingListIndex) {
+  default:
+    llvm_unreachable("Unknown attribute spelling!");
+    return "(No spelling)";
+  case 0:
+    return "import_name";
+  case 1:
+    return "import_name";
+  case 2:
+    return "import_name";
+  }
+}
+
 WorkGroupSizeHintAttr *WorkGroupSizeHintAttr::clone(ASTContext &C) const {
   auto *A = new (C) WorkGroupSizeHintAttr(getLocation(), C, xDim, yDim, zDim, getSpellingListIndex());
   A->Inherited = Inherited;
@@ -11053,6 +11263,8 @@ const char *Attr::getSpelling() const {
     return cast<FormatAttr>(this)->getSpelling();
   case attr::FormatArg:
     return cast<FormatArgAttr>(this)->getSpelling();
+  case attr::FortifyStdLib:
+    return cast<FortifyStdLibAttr>(this)->getSpelling();
   case attr::GNUInline:
     return cast<GNUInlineAttr>(this)->getSpelling();
   case attr::GuardedBy:
@@ -11089,6 +11301,8 @@ const char *Attr::getSpelling() const {
     return cast<LocksExcludedAttr>(this)->getSpelling();
   case attr::LoopHint:
     return cast<LoopHintAttr>(this)->getSpelling();
+  case attr::MIGServerRoutine:
+    return cast<MIGServerRoutineAttr>(this)->getSpelling();
   case attr::MSABI:
     return cast<MSABIAttr>(this)->getSpelling();
   case attr::MSInheritance:
@@ -11225,6 +11439,8 @@ const char *Attr::getSpelling() const {
     return cast<ObjCMethodFamilyAttr>(this)->getSpelling();
   case attr::ObjCNSObject:
     return cast<ObjCNSObjectAttr>(this)->getSpelling();
+  case attr::ObjCNonLazyClass:
+    return cast<ObjCNonLazyClassAttr>(this)->getSpelling();
   case attr::ObjCOwnership:
     return cast<ObjCOwnershipAttr>(this)->getSpelling();
   case attr::ObjCPreciseLifetime:
@@ -11411,6 +11627,10 @@ const char *Attr::getSpelling() const {
     return cast<WeakImportAttr>(this)->getSpelling();
   case attr::WeakRef:
     return cast<WeakRefAttr>(this)->getSpelling();
+  case attr::WebAssemblyImportModule:
+    return cast<WebAssemblyImportModuleAttr>(this)->getSpelling();
+  case attr::WebAssemblyImportName:
+    return cast<WebAssemblyImportNameAttr>(this)->getSpelling();
   case attr::WorkGroupSizeHint:
     return cast<WorkGroupSizeHintAttr>(this)->getSpelling();
   case attr::X86ForceAlignArgPointer:
@@ -11603,6 +11823,8 @@ Attr *Attr::clone(ASTContext &C) const {
     return cast<FormatAttr>(this)->clone(C);
   case attr::FormatArg:
     return cast<FormatArgAttr>(this)->clone(C);
+  case attr::FortifyStdLib:
+    return cast<FortifyStdLibAttr>(this)->clone(C);
   case attr::GNUInline:
     return cast<GNUInlineAttr>(this)->clone(C);
   case attr::GuardedBy:
@@ -11639,6 +11861,8 @@ Attr *Attr::clone(ASTContext &C) const {
     return cast<LocksExcludedAttr>(this)->clone(C);
   case attr::LoopHint:
     return cast<LoopHintAttr>(this)->clone(C);
+  case attr::MIGServerRoutine:
+    return cast<MIGServerRoutineAttr>(this)->clone(C);
   case attr::MSABI:
     return cast<MSABIAttr>(this)->clone(C);
   case attr::MSInheritance:
@@ -11775,6 +11999,8 @@ Attr *Attr::clone(ASTContext &C) const {
     return cast<ObjCMethodFamilyAttr>(this)->clone(C);
   case attr::ObjCNSObject:
     return cast<ObjCNSObjectAttr>(this)->clone(C);
+  case attr::ObjCNonLazyClass:
+    return cast<ObjCNonLazyClassAttr>(this)->clone(C);
   case attr::ObjCOwnership:
     return cast<ObjCOwnershipAttr>(this)->clone(C);
   case attr::ObjCPreciseLifetime:
@@ -11961,6 +12187,10 @@ Attr *Attr::clone(ASTContext &C) const {
     return cast<WeakImportAttr>(this)->clone(C);
   case attr::WeakRef:
     return cast<WeakRefAttr>(this)->clone(C);
+  case attr::WebAssemblyImportModule:
+    return cast<WebAssemblyImportModuleAttr>(this)->clone(C);
+  case attr::WebAssemblyImportName:
+    return cast<WebAssemblyImportNameAttr>(this)->clone(C);
   case attr::WorkGroupSizeHint:
     return cast<WorkGroupSizeHintAttr>(this)->clone(C);
   case attr::X86ForceAlignArgPointer:
@@ -12153,6 +12383,8 @@ void Attr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
     return cast<FormatAttr>(this)->printPretty(OS, Policy);
   case attr::FormatArg:
     return cast<FormatArgAttr>(this)->printPretty(OS, Policy);
+  case attr::FortifyStdLib:
+    return cast<FortifyStdLibAttr>(this)->printPretty(OS, Policy);
   case attr::GNUInline:
     return cast<GNUInlineAttr>(this)->printPretty(OS, Policy);
   case attr::GuardedBy:
@@ -12189,6 +12421,8 @@ void Attr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
     return cast<LocksExcludedAttr>(this)->printPretty(OS, Policy);
   case attr::LoopHint:
     return cast<LoopHintAttr>(this)->printPretty(OS, Policy);
+  case attr::MIGServerRoutine:
+    return cast<MIGServerRoutineAttr>(this)->printPretty(OS, Policy);
   case attr::MSABI:
     return cast<MSABIAttr>(this)->printPretty(OS, Policy);
   case attr::MSInheritance:
@@ -12325,6 +12559,8 @@ void Attr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
     return cast<ObjCMethodFamilyAttr>(this)->printPretty(OS, Policy);
   case attr::ObjCNSObject:
     return cast<ObjCNSObjectAttr>(this)->printPretty(OS, Policy);
+  case attr::ObjCNonLazyClass:
+    return cast<ObjCNonLazyClassAttr>(this)->printPretty(OS, Policy);
   case attr::ObjCOwnership:
     return cast<ObjCOwnershipAttr>(this)->printPretty(OS, Policy);
   case attr::ObjCPreciseLifetime:
@@ -12511,6 +12747,10 @@ void Attr::printPretty(raw_ostream &OS, const PrintingPolicy &Policy) const {
     return cast<WeakImportAttr>(this)->printPretty(OS, Policy);
   case attr::WeakRef:
     return cast<WeakRefAttr>(this)->printPretty(OS, Policy);
+  case attr::WebAssemblyImportModule:
+    return cast<WebAssemblyImportModuleAttr>(this)->printPretty(OS, Policy);
+  case attr::WebAssemblyImportName:
+    return cast<WebAssemblyImportNameAttr>(this)->printPretty(OS, Policy);
   case attr::WorkGroupSizeHint:
     return cast<WorkGroupSizeHintAttr>(this)->printPretty(OS, Policy);
   case attr::X86ForceAlignArgPointer:

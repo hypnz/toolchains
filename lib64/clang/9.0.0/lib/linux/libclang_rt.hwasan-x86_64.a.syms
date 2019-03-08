@@ -17,6 +17,7 @@
   __interceptor_pvalloc;
   __interceptor_realloc;
   __interceptor_valloc;
+  __interceptor_vfork;
   __libc_memalign;
   __sanitizer___libc_memalign;
   __sanitizer_acquire_crash_state;
@@ -96,4 +97,5 @@
   pvalloc;
   realloc;
   valloc;
+  vfork;
 };

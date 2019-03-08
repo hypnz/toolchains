@@ -463,6 +463,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<FormatArgAttr>(At);
       return A->clone(C);
     }
+    case attr::FortifyStdLib: {
+      const auto *A = cast<FortifyStdLibAttr>(At);
+      return A->clone(C);
+    }
     case attr::GNUInline: {
       const auto *A = cast<GNUInlineAttr>(At);
       return A->clone(C);
@@ -556,6 +560,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::LoopHint: {
       const auto *A = cast<LoopHintAttr>(At);
+      return A->clone(C);
+    }
+    case attr::MIGServerRoutine: {
+      const auto *A = cast<MIGServerRoutineAttr>(At);
       return A->clone(C);
     }
     case attr::MSABI: {
@@ -828,6 +836,10 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
     }
     case attr::ObjCNSObject: {
       const auto *A = cast<ObjCNSObjectAttr>(At);
+      return A->clone(C);
+    }
+    case attr::ObjCNonLazyClass: {
+      const auto *A = cast<ObjCNonLazyClassAttr>(At);
       return A->clone(C);
     }
     case attr::ObjCOwnership: {
@@ -1262,6 +1274,14 @@ Attr *instantiateTemplateAttribute(const Attr *At, ASTContext &C, Sema &S,
       const auto *A = cast<WeakRefAttr>(At);
       return A->clone(C);
     }
+    case attr::WebAssemblyImportModule: {
+      const auto *A = cast<WebAssemblyImportModuleAttr>(At);
+      return A->clone(C);
+    }
+    case attr::WebAssemblyImportName: {
+      const auto *A = cast<WebAssemblyImportNameAttr>(At);
+      return A->clone(C);
+    }
     case attr::WorkGroupSizeHint: {
       const auto *A = cast<WorkGroupSizeHintAttr>(At);
       return A->clone(C);
@@ -1557,6 +1577,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
     case attr::FormatArg: {
       return nullptr;
     }
+    case attr::FortifyStdLib: {
+      return nullptr;
+    }
     case attr::GNUInline: {
       return nullptr;
     }
@@ -1609,6 +1632,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::LoopHint: {
+      return nullptr;
+    }
+    case attr::MIGServerRoutine: {
       return nullptr;
     }
     case attr::MSABI: {
@@ -1813,6 +1839,9 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::ObjCNSObject: {
+      return nullptr;
+    }
+    case attr::ObjCNonLazyClass: {
       return nullptr;
     }
     case attr::ObjCOwnership: {
@@ -2092,6 +2121,12 @@ Attr *instantiateTemplateAttributeForDecl(const Attr *At,
       return nullptr;
     }
     case attr::WeakRef: {
+      return nullptr;
+    }
+    case attr::WebAssemblyImportModule: {
+      return nullptr;
+    }
+    case attr::WebAssemblyImportName: {
       return nullptr;
     }
     case attr::WorkGroupSizeHint: {

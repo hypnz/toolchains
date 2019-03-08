@@ -1,4 +1,5 @@
 {
+  __bzero;
   __cxa_atexit;
   __fprintf_chk;
   __fxstat;
@@ -6,6 +7,7 @@
   __fxstatat;
   __fxstatat64;
   __getdelim;
+  __interceptor___bzero;
   __interceptor___cxa_atexit;
   __interceptor___fprintf_chk;
   __interceptor___fxstat;
@@ -95,7 +97,9 @@
   __interceptor_atexit;
   __interceptor_backtrace;
   __interceptor_backtrace_symbols;
+  __interceptor_bcmp;
   __interceptor_bcopy;
+  __interceptor_bzero;
   __interceptor_calloc;
   __interceptor_canonicalize_file_name;
   __interceptor_capget;
@@ -326,6 +330,7 @@
   __interceptor_pthread_setcancelstate;
   __interceptor_pthread_setcanceltype;
   __interceptor_pthread_setname_np;
+  __interceptor_pthread_sigmask;
   __interceptor_ptrace;
   __interceptor_putenv;
   __interceptor_puts;
@@ -464,6 +469,7 @@
   __interceptor_tmpnam;
   __interceptor_tmpnam_r;
   __interceptor_tsearch;
+  __interceptor_ttyname;
   __interceptor_ttyname_r;
   __interceptor_tzset;
   __interceptor_uname;
@@ -1332,7 +1338,9 @@
   atexit;
   backtrace;
   backtrace_symbols;
+  bcmp;
   bcopy;
+  bzero;
   calloc;
   canonicalize_file_name;
   capget;
@@ -1561,6 +1569,7 @@
   pthread_setcancelstate;
   pthread_setcanceltype;
   pthread_setname_np;
+  pthread_sigmask;
   ptrace;
   putenv;
   puts;
@@ -1697,6 +1706,7 @@
   tmpnam;
   tmpnam_r;
   tsearch;
+  ttyname;
   ttyname_r;
   tzset;
   uname;
